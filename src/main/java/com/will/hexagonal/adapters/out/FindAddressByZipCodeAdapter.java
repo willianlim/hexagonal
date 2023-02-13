@@ -1,7 +1,7 @@
 package com.will.hexagonal.adapters.out;
 
 import com.will.hexagonal.adapters.out.client.IFindAddressByZipCodeClient;
-import com.will.hexagonal.adapters.out.client.response.AddressResponse;
+import com.will.hexagonal.adapters.out.client.mapper.IAddressResponseMapper;
 import com.will.hexagonal.application.core.domain.Address;
 import com.will.hexagonal.application.ports.out.IFindAddressByZipCodeOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +14,12 @@ public class FindAddressByZipCodeAdapter implements IFindAddressByZipCodeOutputP
     private IFindAddressByZipCodeClient iFindAddressByZipCodeClient;
 
     @Autowired
-    private AddressResponse addressResponse;
+    private IAddressResponseMapper iAddressResponseMapper;
 
     @Override
     public Address find(String zipCode) {
 
         var addressResponse = iFindAddressByZipCodeClient.find(zipCode);
-        return null;
+        return iAddressResponseMapper.toAddress(addressResponse);
     }
 }
