@@ -4,6 +4,7 @@ import com.will.hexagonal.adapters.in.controller.mapper.ICustomerMapper;
 import com.will.hexagonal.adapters.in.controller.request.CustomerRequest;
 import com.will.hexagonal.adapters.in.controller.response.CustomerResponse;
 import com.will.hexagonal.application.core.domain.Customer;
+import com.will.hexagonal.application.ports.in.IDeleteCustomerByIdIputPort;
 import com.will.hexagonal.application.ports.in.IFindCustomerByIdInputPort;
 import com.will.hexagonal.application.ports.in.IInsertCustomerInputPort;
 import com.will.hexagonal.application.ports.in.IUpdateCustomerInputPort;
@@ -24,6 +25,9 @@ public class CustomerController {
 
     @Autowired
     private IUpdateCustomerInputPort iUpdateCustomerInputPort;
+
+    @Autowired
+    private IDeleteCustomerByIdIputPort iDeleteCustomerByIdIputPort;
 
     @Autowired
     private ICustomerMapper iCustomerMapper;
@@ -51,6 +55,13 @@ public class CustomerController {
         Customer customer = iCustomerMapper.toCustomer(customerRequest);
         customer.setId(id);
         iUpdateCustomerInputPort.update(customer, customerRequest.getZipCode());
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable final String id) {
+
+        iDeleteCustomerByIdIputPort.delete(id);
         return ResponseEntity.noContent().build();
     }
 }
