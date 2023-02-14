@@ -8,4 +8,5 @@ import org.mapstruct.Mapper;
 public interface ICustomerEntityMapper {
 
     CustomerEntity toCustomerEntity(Customer customer);
+    Customer toCustomer(CustomerEntity customerEntity);
 }
