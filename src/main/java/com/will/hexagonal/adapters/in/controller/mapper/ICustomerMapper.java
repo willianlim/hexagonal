@@ -1,6 +1,7 @@
 package com.will.hexagonal.adapters.in.controller.mapper;
 
 import com.will.hexagonal.adapters.in.controller.request.CustomerRequest;
+import com.will.hexagonal.adapters.in.controller.response.CustomerResponse;
 import com.will.hexagonal.application.core.domain.Customer;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,4 +13,6 @@ public interface ICustomerMapper {
     @Mapping(target = "address", ignore = true)
     @Mapping(target = "isValidCpf", ignore = true)
     Customer toCustomer(CustomerRequest customerRequest);
+
+    CustomerResponse toCustomerResponse(Customer customer);
 }
