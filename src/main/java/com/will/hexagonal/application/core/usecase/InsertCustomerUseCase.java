@@ -8,17 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class InsertCustomerUseCase implements IInsertCustomerInputPort {
 
-    private final IFindAddressByZipCodeOutputPort iFindAddressByZipCodeOutputPort;
+    @Autowired
+    private IFindAddressByZipCodeOutputPort iFindAddressByZipCodeOutputPort;
 
-    private final IInsertCustomerOutputPort iInsertCustomerOutputPort;
-
-    public InsertCustomerUseCase(
-            IFindAddressByZipCodeOutputPort iFindAddressByZipCodeOutputPort,
-            IInsertCustomerOutputPort iInsertCustomerOutputPort) {
-
-        this.iFindAddressByZipCodeOutputPort = iFindAddressByZipCodeOutputPort;
-        this.iInsertCustomerOutputPort = iInsertCustomerOutputPort;
-    }
+    @Autowired
+    private IInsertCustomerOutputPort iInsertCustomerOutputPort;
 
     public void insert(Customer customer, String zipcode) {
 
