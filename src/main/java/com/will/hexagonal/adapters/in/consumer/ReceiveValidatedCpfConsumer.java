@@ -8,7 +8,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ReceiveValidatedCpf {
+public class ReceiveValidatedCpfConsumer {
 
     @Autowired
     private IUpdateCustomerInputPort iUpdateCustomerInputPort;
