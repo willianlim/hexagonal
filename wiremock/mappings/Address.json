@@ -1,0 +1,17 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/addresses/384000000"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "street": "Rua Hexagonal",
+      "city": "Uberlâncdia",
+      "state": "Minas Gerais"
+    }
+  }
+}
