@@ -5,18 +5,24 @@ import com.will.hexagonal.application.ports.in.IFindCustomerByIdInputPort;
 import com.will.hexagonal.application.ports.in.IUpdateCustomerInputPort;
 import com.will.hexagonal.application.ports.out.IFindAddressByZipCodeOutputPort;
 import com.will.hexagonal.application.ports.out.IUpdateCustomerOutputPort;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class UpdateCustomerUseCase implements IUpdateCustomerInputPort {
 
-    @Autowired
-    private IFindCustomerByIdInputPort iFindCustomerByIdInputPort;
+    private final IFindCustomerByIdInputPort iFindCustomerByIdInputPort;
 
-    @Autowired
-    private IFindAddressByZipCodeOutputPort iFindAddressByZipCodeOutputPort;
+    private final IFindAddressByZipCodeOutputPort iFindAddressByZipCodeOutputPort;
 
-    @Autowired
-    private IUpdateCustomerOutputPort iUpdateCustomerOutputPort;
+    private final IUpdateCustomerOutputPort iUpdateCustomerOutputPort;
+
+    public UpdateCustomerUseCase(
+            IFindCustomerByIdInputPort iFindCustomerByIdInputPort,
+            IFindAddressByZipCodeOutputPort iFindAddressByZipCodeOutputPort,
+            IUpdateCustomerOutputPort iUpdateCustomerOutputPort
+    ) {
+        this.iFindCustomerByIdInputPort = iFindCustomerByIdInputPort;
+        this.iFindAddressByZipCodeOutputPort = iFindAddressByZipCodeOutputPort;
+        this.iUpdateCustomerOutputPort = iUpdateCustomerOutputPort;
+    }
 
     @Override
     public void update(Customer customer, String zipCode) {
@@ -24,5 +30,6 @@ public class UpdateCustomerUseCase implements IUpdateCustomerInputPort {
         iFindCustomerByIdInputPort.find(customer.getId());
         var address = iFindAddressByZipCodeOutputPort.find(zipCode);
         customer.setAddress(address);
+        iUpdateCustomerOutputPort.update(customer);
     }
 }
